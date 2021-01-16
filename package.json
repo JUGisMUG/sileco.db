@@ -1,0 +1,23 @@
+{
+  "name": "sileco.db",
+  "version": "1.0.0",
+  "description": "An advanced json database for storing data!",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JUGisMUG/sileco.db.git"
+  },
+  "keywords": ["database", "data", "db", "json", "json-database", "node"],
+  "author": "JUGisMUG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JUGisMUG/sileco.db/issues"
+  },
+  "homepage": "https://github.com/JUGisMUG/sileco.db#readme",
+  
+  "dependencies": {},
+  "devDependencies": {}
+}
