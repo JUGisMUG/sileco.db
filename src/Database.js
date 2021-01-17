@@ -28,12 +28,6 @@ class Database {
       if(extension(this.file) !== 'json') throw Error('sileco.db: The file you are trying to set in the (database) class is not a json file, and sileco.db can only store data in json files')
       
       try {
-        fs.unlinkSync(this.file)
-      } catch {
-        //Don't do anything 
-      }
-      
-      try {
         loadFile(this.file)
       } catch {
         writeData(this.file, {})
