@@ -2,8 +2,8 @@
 - A advanced json based database for storing data! Made with no dependencies!
 [![NPM](https://nodei.co/npm/sileco.db.png)](https://nodei.co/npm/sileco.db/)
 ## 🔮 Amazaing Features
-- [Backup system](https://www.npmjs.com/package/sileco.db#🔮-Data-Backup)
-- [Handling multiple json files](https://www.npmjs.com/package/sileco.db#🔮-Handling-Multiple-Files)
+- [Backup system]
+- [Handling multiple json files]
 - Made with 0 dependencies
 - Simple to get started with
 ## 🔮 Getting Started
