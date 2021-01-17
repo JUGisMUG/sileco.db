@@ -16,6 +16,11 @@ npm i sileco.db
 const { Database } = require('sileco.db')
 const db = new Database()
 ```
+- Defining for typescript:
+```typescript
+import { Database } from 'sileco.db';
+const db = new Database();
+```
 ## 🔮 Optional Parameters 
 - For the Database class, you can pass in a parameter to set a file rather than using the default file! 
 - **TIP**: If the file dosen't exist, it will create it
