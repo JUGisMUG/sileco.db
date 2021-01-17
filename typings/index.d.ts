@@ -14,7 +14,7 @@ declare module "sileco.db" {
     public fetchAllData(): object;
     public deleteEach(data: void): void;
     public push(array: string, value: any): void;
-    public pop(array: string, index: number): void;
+    public pop(array: string, index: number | string): void;
   }
 
   export { Database };
