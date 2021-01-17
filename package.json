@@ -1,7 +1,7 @@
 {
   "name": "sileco.db",
   "version": "1.0.0",
-  "description": "An advanced json database for storing data!",
+  "description": "An advanced json based database for storing data!",
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
