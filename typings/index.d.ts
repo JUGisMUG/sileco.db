@@ -1,5 +1,5 @@
 declare module "sileco.db" {
-  class Database {
+  export class Database {
     constructor(file?: string);
     private file: string;
     public setBackup(filePath: string): void;
@@ -16,6 +16,4 @@ declare module "sileco.db" {
     public push(array: string, value: any): void;
     public pop(array: string, index: number | string): void;
   }
-
-  export { Database };
 }
