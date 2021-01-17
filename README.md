@@ -31,7 +31,7 @@ const db = new Database('./database.json') // -> sets database.json as the datab
 const { Database } = require('sileco.db');
 const db = new Database();
 
-db.set('Object', {
+db.set('Object', { //-> Object
   key: 'value',
   key2: 'value'
 });
