@@ -1,0 +1,21 @@
+declare module "sileco.db" {
+  class Database {
+    constructor(file?: string);
+    private file: string;
+    public setBackup(filePath: string): void;
+    public loadBackup(): void;
+    public set(data: string, value: any): void;
+    public fetch(data: string): any;
+    public remove(data: string): void;
+    public add(data: string, value: any): void;
+    public subtract(data: string, value: any): void;
+    public has(data: string): boolean;
+    public clear(): void;
+    public fetchAllData(): object;
+    public deleteEach(data: void): void;
+    public push(array: string, value: any): void;
+    public pop(array: string, index: number): void;
+  }
+
+  export { Database };
+}

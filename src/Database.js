@@ -1,5 +1,5 @@
 const fs = require('fs');
-var backup;
+let backup;
 const loadFile = (file) => JSON.parse(fs.readFileSync(file, 'utf-8'));
 const writeData = (file, data) =>  fs.writeFileSync(file, JSON.stringify(data, null, 2));
 const extension = (filePath) => {
@@ -50,12 +50,14 @@ class Database {
     } catch {
       writeData(backup, {})
     }
+    return;
   }
   
   loadBackup() {
     if (backup === undefined) throw Error('There is no backup setted to load for the (loadBackup) function! To set a backup, please use the (setBackup) function');
   
     writeData(this.file, loadFile(backup));
+    return;
   }
   
   set(data, value) {
@@ -66,7 +68,8 @@ class Database {
 	  
 	  fileData[data] = value;
 	  writeData(this.file, fileData);
-	  addToBackup(fileData);
+    addToBackup(fileData);
+    return;
   }
   
   fetch(data) {
@@ -89,6 +92,7 @@ class Database {
     fileData[data] = undefined;
     writeData(this.file, fileData);
     addToBackup(fileData);
+    return;
   }
   
   add(data, value) {
@@ -103,7 +107,8 @@ class Database {
 
 	  fileData[data] = fileData[data] + value;
 	  writeData(this.file, fileData);
-	  addToBackup(fileData);
+    addToBackup(fileData);
+    return;
   }
   
   subtract(data, value) {
@@ -119,6 +124,7 @@ class Database {
     fileData[data] = fileData[data] - value;
     writeData(this.file, fileData);
     addToBackup(fileData);
+    return;
   }
   
   has(data) {
@@ -132,6 +138,7 @@ class Database {
   
   clear() {
     writeData(this.file, {});
+    return;
   }
   
   fetchAllData() {
@@ -149,6 +156,7 @@ class Database {
     array.forEach((Data) => {
       this.remove(Data)
     });
+    return;
   }
   
   push(array, value) {
@@ -163,6 +171,7 @@ class Database {
     } else if (!fileData[array]) {
       this.set(array, [value])
     }
+    return
   }
   
   pop(array, index) {
@@ -184,6 +193,7 @@ class Database {
           throw Error('sileco.db: Unable to find a value with the provided index/value for the (pop) function')
         }
       }
+      return;
   }
 }
 
