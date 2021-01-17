@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 12 
           registry-url:  https://npm.pkg.githib.com/
-          scope: @JUGisMUG
+          scope: '@JUGisMUG'
       - run: npm install
       - run: npm publish
         env:
