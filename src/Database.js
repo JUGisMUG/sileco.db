@@ -98,7 +98,7 @@ class Database {
   add(data, value) {
     if (!data) throw Error('sileco.db: Please mention the data for the (add) function');
 	  if (!value) throw Error('sileco.db: Please mention the value to add for the (add) function');
-	  if(typeof value != "number") throw Error(`sileco.db: The value to add for the (add) function must be a number, received type: ${typeof value}`);
+	  if(typeof value !== "number") throw Error(`sileco.db: The value to add for the (add) function must be a number, received type: ${typeof value}`);
 	  
 	  let fileData = loadFile(this.file)
 
@@ -114,7 +114,7 @@ class Database {
   subtract(data, value) {
     if (!data) throw Error('sileco.db: Please mention the data for the (substract) function');
     if (!value) throw Error('sileco.db: Please mention thevalue to substract for the (substract) function');
-    if (typeof value != "number") throw Error(`sileco.db: The value to add for the (substract) function must be a number, received type: ${typeof value}`);
+    if (typeof value !== "number") throw Error(`sileco.db: The value to add for the (substract) function must be a number, received type: ${typeof value}`);
     
     let fileData = loadFile(this.file)
   
@@ -147,13 +147,15 @@ class Database {
   
   deleteEach(data) {
     if (!data) throw Error('sileco.db: Plesse mention the data for the (deleteEach) function')
+    
+    let fileData = loadFile(this.file)
   
-    let array = Object.keys(file)
-    if (array === '') throw Error('sileco.db: There is nothing identical to delete for the (deleteEach) function')
+    let item = Object.keys(fileData)
+    if (item === '') throw Error('sileco.db: There is nothing identical to delete for the (deleteEach) function')
   
-    array = array.filter((Data) => Data.includes(data));
+    item = item.filter((Data) => Data.includes(data));
   
-    array.forEach((Data) => {
+    item.forEach((Data) => {
       this.remove(Data)
     });
     return;
@@ -194,6 +196,22 @@ class Database {
         }
       }
       return;
+  }
+  
+  deleteKey(object, key) {
+    if (!object) throw Error('sileco.db: Please provide the object, you want to delete a key of for the (deleteKey) function');
+    if (!key) throw Error('sileco.db: Please provide the key of the object for the (deleteKey) function');
+    
+    let fileData = loadFile(this.file);
+    
+    if (!fileData[object]) throw Error("sileco.db: The object you provided dosen't exist in the database for the (deleteKey) function");
+    
+    if (typeof fileData[object] !== 'object') throw Error('sileco.db: The provided object for the (deleteKey) function is not an object in the database');
+    
+    delete fileData[object][key];
+    writeData(this.file, fileData);
+    
+    return;
   }
 }
 

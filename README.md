@@ -65,7 +65,9 @@ db.clear(); //-> Clears everything from the database
 
 db.fetchAllData(); //-> Fetches everything in the database
 
-db.deleteEach('data'); //-> Deletes the data from the database that has the provided data in the name of it.
+db.deleteKey('object', 'key'); //-> Deletes the provided key from the given object
+
+db.deleteEach('data'); //-> Deletes each data that starts with the given parameter
 
 //Example For understanding the (deleteEach) function better:
 
