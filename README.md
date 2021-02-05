@@ -1,27 +1,42 @@
 ## 🔮 sileco.db
-- A advanced json based database for storing data! Made with no dependencies!
+- A advanced database for storing data! Supports 2 types of databases: Json & Mongo!
 [![NPM](https://nodei.co/npm/sileco.db.png)](https://nodei.co/npm/sileco.db/)
 ## 🔮 Amazaing Features
 - [Backup system]
 - [Handling multiple json files]
-- Made with 0 dependencies
-- Simple to get started with
+- Two types of databases: Mongo and Json
+- Simple to use
+- Good docs/examples
 ## 🔮 Getting Started
 - You can isntall the package like that:
 ```bash
 npm i sileco.db
 ```
 - You can define it like this simply:
+- JSON Database:
 ```javascript
+//Javascript
 const { Database } = require('sileco.db')
 const db = new Database()
 ```
-- Defining for typescript:
 ```typescript
-import { Database } from 'sileco.db';
-const db = new Database();
+//Typescript
+import { Database } from 'sileco.db'
+const db = new Database()
 ```
-## 🔮 Optional Parameters 
+- Mongo Database:
+```javascript
+//Javascript
+const { Mongo } = require('sileco.db')
+const db = new Mongo('your Mongo url here')
+```
+```typescript
+//Typescript
+import { Mongo } from 'sileco.db'
+const db = new Mongo('your Mongo url here')
+```
+## 🔮 Optional Parameters
+- **JSON database**:
 - For the Database class, you can pass in a parameter to set a file rather than using the default file! 
 - **TIP**: If the file dosen't exist, it will create it
 - **TIP**: If you don't pass in the file Path, it will automatically set the path to **./**
@@ -30,8 +45,75 @@ const db = new Database();
 const { Database } = require('sileco.db')
 const db = new Database('./database.json') // -> sets database.json as the database file
 ```
-## 🔮 Example // Docs
-- Here is a exmaple on how to use this module!
+- **MONGO database**:
+- For the Mongo class, you can pass in a parameter to specify the connection options.
+**TIP**: If you don't specify options, it has some default options for optimization that will always be applied.
+Here is an quick example for specifing options for the Mongo class:
+```javascript
+const { Mongo } = require('sileco.db')
+const db = new Mongo('your Mongo uri', {
+  connectTimeoutMS: 5000 //-> Connects after 5 seconds of waiting
+  ...more connection options
+})
+```
+## 🔮 Example // Docs - Mongo Database
+- Here is an example on how to use the mongo database!
+```javascript
+const { Mongo } = require('sileco.db');
+const db = new Mongo('mongo uri here');
+
+db.set('Object', { //-> Object
+  key: 'value',
+  key2: 'value'
+});
+
+db.set('Array', [ //-> Array
+  'element', 
+  'element2'
+  ]);
+  
+db.push('Array', 'value to push'); //-> Pushing a value to an array
+
+db.pop('Array', 'value to remove from the array'); //-> Removing something from an array (using value)
+db.pop('Array', 'index of the value to remove from the array'); //-> Removing something from an array (using index)
+
+db.fetch('data').then(result => { //-> Fetches the value of the data: "data"
+  //Do something with the fetched data:
+  console.log(result)
+})
+
+db.add('data', 1); //-> Adds one to the data: "data"
+
+db.subtract('data', 1); //-> Subtracts one from the data: "data"
+
+db.remove('data'); //-> Removes the data: "data" from the database
+
+db.has('data').then(result => { //-> Returns true or false depending on if the db has the provided data or not.
+  //Do something with the returned result:
+  console.log(result)
+})
+
+db.clear(); //-> Clears everything from the database
+
+db.fetchAllData().then(result => { //-> Fetches everything from db in an array with object elements for each document.
+  //Do something with with the fetched data:
+  console.log(result)
+})
+
+db.deleteKey('object', 'key'); //-> Deletes the provided key from the given object
+
+db.deleteEach('data'); //-> Deletes each data that starts with the given parameter
+
+//Example For understanding the (deleteEach) function better:
+
+db.set('username-John', 'isiiw92sj');
+db.set('username-Luke', 'is8w8iwjs');
+db.set('username-James', 'ow9w9wosk');
+
+db.deleteEach('username'); //-> Deletes all the saved usernames
+```
+## 🔮 Example // Docs - Json Database
+- Here is a exmaple on how to use the json database!
 ```javascript
 const { Database } = require('sileco.db');
 const db = new Database();
@@ -77,7 +159,7 @@ db.set('password-James', '829ej29');
 
 db.deleteEach('password'); //-> Deletes all the saved passwords
 ```
-## 🔮 Data Backup
+## 🔮 Data Backup - Json Database
 - You can also save your data as a backup, in another file, so if your main database file gets deleted..you cwn backup your data easily!
 - Here's an example on how to backup your data:
 ```javascript
@@ -93,7 +175,7 @@ const db = new Database();
 
 db.loadBackup(); //-> Loads the backup from the setted file from the (setBackup) function 
 ```
-## 🔮 Handling Multiple Files
+## 🔮 Handling Multiple Files - Json Database
 - Let's say you want to store the passwords and emails for some users..and you want different files to save them.
 - Here's an example on how to do that:
 ```javascript

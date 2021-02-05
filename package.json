@@ -1,7 +1,7 @@
 {
   "name": "sileco.db",
-  "version": "1.2.1",
-  "description": "An advanced json based database for storing data!",
+  "version": "2.0.0",
+  "description": "An advanced database for storing data!",
   "main": "./index.js",
   "types": "./typings/index.d.ts",
   "scripts": {
@@ -17,7 +17,9 @@
     "db",
     "json",
     "json-database",
-    "node"
+    "node",
+    "mongo",
+    "mongo-database"
   ],
   "author": "JUGisMUG",
   "license": "MIT",
@@ -25,6 +27,8 @@
     "url": "https://github.com/JUGisMUG/sileco.db/issues"
   },
   "homepage": "https://github.com/JUGisMUG/sileco.db#readme",
-  "dependencies": {},
+  "dependencies": {
+    "mongoose": "^5.11.14"
+  },
   "devDependencies": {}
 }

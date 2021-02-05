@@ -17,4 +17,22 @@ declare module "sileco.db" {
     public pop(array: string, index: number | string): void;
     public deleteKey(object: string, key: string): void;
   }
+  
+  export class Mongo {
+    constructor(url?: string, options?: object)
+    private url: string;
+    public state(): string;
+    public disconnect(): void;
+    public set(key: string, value: any): void;
+    public fetch(key: string): any;
+    public remove(key: string): void;
+    public add(key: string, value: number): void;
+    public subtract(key: string, value: number): void;
+    public has(key: string): boolean;
+    public fetchAllData(): any;
+    public deleteEach(key: string): void;
+    public push(array: string, value: any): void;
+    public pop(array: string, index: number | string): void;
+    public deleteKey(object: string, key: string): void;
+  }
 }

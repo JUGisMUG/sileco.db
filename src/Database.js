@@ -1,7 +1,7 @@
 const fs = require('fs');
 let backup;
 const loadFile = (file) => JSON.parse(fs.readFileSync(file, 'utf-8'));
-const writeData = (file, data) =>  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+const writeData = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
 const extension = (filePath) => {
   let parts = filePath.split('.') 
   return parts[parts.length - 1];
@@ -178,11 +178,11 @@ class Database {
   
   pop(array, index) {
     if (!array) throw Error('sileco.db: Please mention the array you want to pop something from for the (pop) function')
-    if (index === undefined) throw Error('sileco.db: Please mention the index/value of the value you want to pop from the array for the (pop) function')
+    if (index === undefined) throw Error('sileco.db: Please mention the index/name of the element you want to pop from the array for the (pop) function')
     
     let fileData = loadFile(this.file)
     
-    if (!fileData[array] && !Array.isArray(fileData[array])) throw Error("sileco.db: The array you mentioned dosen't exist or it is not a array")
+    if (!fileData[array] || !Array.isArray(fileData[array])) throw Error("sileco.db: The array you mentioned dosen't exist or it is not a array")
     
     if (typeof index === "number") {
       fileData[array].splice(index, 1)
@@ -192,14 +192,14 @@ class Database {
           fileData[array].splice(fileData[array].indexOf(index), 1)
           writeData(this.file, fileData)
        } else {
-          throw Error('sileco.db: Unable to find a value with the provided index/value for the (pop) function')
+          throw Error('sileco.db: Unable to find a element with the provided index/name for the (pop) function')
         }
       }
       return;
   }
   
   deleteKey(object, key) {
-    if (!object) throw Error('sileco.db: Please provide the object, you want to delete a key of for the (deleteKey) function');
+    if (!object) throw Error('sileco.db: Please provide the object that you want to delete a key from for the (deleteKey) function');
     if (!key) throw Error('sileco.db: Please provide the key of the object for the (deleteKey) function');
     
     let fileData = loadFile(this.file);
@@ -207,6 +207,8 @@ class Database {
     if (!fileData[object]) throw Error("sileco.db: The object you provided dosen't exist in the database for the (deleteKey) function");
     
     if (typeof fileData[object] !== 'object') throw Error('sileco.db: The provided object for the (deleteKey) function is not an object in the database');
+    
+   if (!fileData[object][key]) return; 
     
     delete fileData[object][key];
     writeData(this.file, fileData);
@@ -216,3 +218,4 @@ class Database {
 }
 
 module.exports = { Database };
+ 
