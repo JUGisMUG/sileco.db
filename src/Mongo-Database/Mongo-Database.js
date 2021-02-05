@@ -6,32 +6,22 @@ class Mongo {
 		this.url = url;
 
 		if (!url) {
-			throw Error(
-				'sileco.db: MongoDB key is not provided for the (MongoDatabase) class'
-			);
+			throw Error('sileco.db: MongoDB key is not provided for the (MongoDatabase) class');
 		}
 
 		if (!url.match(/^mongodb([a-z+]{0,15})?.+/g)) {
-			throw Error(
-				'sileco.db: provided MongoDB key is invalid for the (MongoDatabase) class'
-			);
+			throw Error('sileco.db: provided MongoDB key is invalid for the (MongoDatabase) class');
 		}
 
 		if (options && typeof options !== 'object') {
-			throw Error(
-				`sileco.db: options for connecting must be an object for the (MongoDatabase) class`
-			);
+			throw Error(`sileco.db: options for connecting must be an object for the (MongoDatabase) class`);
 		}
 
-		mongoose.connect(
-			url,
-			{
-				...options,
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-				useFindAndModify: false
-			}
-		);
+		mongoose.connect(url, {
+		  ...options,
+		  useNewUrlParser: true,useUnifiedTopology: true,
+		  useFindAndModify: false
+			});
 
 		mongoose.connection.on('error', err => {
 			throw Error(err);
@@ -68,10 +58,7 @@ class Mongo {
 
 	async set(key, value) {
 		if (!key) throw Error('sileco.db: A key for the (set) function is needed');
-		if (!value)
-			throw Error(
-				'sileco.db: A value for the key in the (set) function is not provided'
-			);
+		if (!value) throw Error('sileco.db: A value for the key in the (set) function is not provided');
 
 		let data = await Document.findOne({ key: key });
 
@@ -88,8 +75,7 @@ class Mongo {
 	}
 
 	async fetch(key) {
-		if (!key)
-			throw Error('sileco.db: The key for the (fetch) function is needed');
+		if (!key) throw Error('sileco.db: The key for the (fetch) function is needed');
 
 		let data = await Document.findOne({ key: key });
 
@@ -97,8 +83,7 @@ class Mongo {
 	}
 
 	async remove(key) {
-		if (!key)
-			throw Error('sileco.db: The key for the (remove) function in needed');
+		if (!key) throw Error('sileco.db: The key for the (remove) function in needed');
 
 		let data = await Document.findOne({ key: key });
 
@@ -111,12 +96,8 @@ class Mongo {
 	}
 
 	async add(key, value) {
-		if (!key)
-			throw Error('sileco.db: The key for the (add) function is reauired');
-		if (!value)
-			throw Error(
-				'sileco.db: The value to add for the (add) function is needed'
-			);
+		if (!key) throw Error('sileco.db: The key for the (add) function is reauired');
+		if (!value) throw Error('sileco.db: The value to add for the (add) function is needed');
 
 		let data = await Document.findOne({ key: key });
 
@@ -134,12 +115,8 @@ class Mongo {
 	}
 
 	async subtract(key, value) {
-		if (!key)
-			throw Error('sileco.db: The key for the (subtract) function is reauired');
-		if (!value)
-			throw Error(
-				'sileco.db: The value to add for the (subtract) function is needed'
-			);
+		if (!key) throw Error('sileco.db: The key for the (subtract) function is reauired');
+		if (!value) throw Error('sileco.db: The value to add for the (subtract) function is needed');
 
 		let data = await Document.findOne({ key: key });
 
@@ -157,8 +134,7 @@ class Mongo {
 	}
 
 	async has(key) {
-		if (!key)
-			throw Error('sileco.db: The key for the (has) function is required');
+		if (!key) throw Error('sileco.db: The key for the (has) function is required');
 
 		let data = await Document.findOne({ key: key });
 
@@ -177,8 +153,7 @@ class Mongo {
 	}
 
 	async deleteEach(key) {
-		if (!key)
-			throw Error('sileco.db: The key for the (deleteEach) function is needed');
+		if (!key) throw Error('sileco.db: The key for the (deleteEach) function is needed');
 
 		let data = await Document.find({});
 		data = data.filter(doc => doc.key.includes(key));
@@ -191,14 +166,8 @@ class Mongo {
 	}
 
 	async push(array, value) {
-		if (!array)
-			throw Error(
-				'sileco.db: A array for the (push) function was not provided'
-			);
-		if (!value)
-			throw Error(
-				'sileco.db: A value to push to the array for the (push) function is required'
-			);
+		if (!array) throw Error('sileco.db: A array for the (push) function was not provided');
+		if (!value) throw Error('sileco.db: A value to push to the array for the (push) function is required');
 
 		let data = await Document.findOne({ key: array });
 
@@ -214,21 +183,12 @@ class Mongo {
 	}
 
 	async pop(array, index) {
-		if (!array)
-			throw Error(
-				'sileco.db: No array was provided for the (pop) function (pop) function'
-			);
-		if (index === undefined)
-			throw Error(
-				'sileco.db: Please mention the index/name of the element you want to pop from the array for the (pop) function'
-			);
+		if (!array) throw Error('sileco.db: No array was provided for the (pop) function (pop) function');
+		if (index === undefined) throw Error('sileco.db: Please mention the index/name of the element you want to pop from the array for the (pop) function');
 
 		let data = await Document.findOne({ key: array });
 
-		if (!data || !Array.isArray(data['data']))
-			throw Error(
-				"sileco.db: The array you mentioned dosen't exist or it is not a array"
-			);
+		if (!data || !Array.isArray(data['data'])) throw Error("sileco.db: The array you mentioned dosen't exist or it is not a array");
 
 		if (typeof index === 'number') {
 			data['data'].splice(index, 1);
@@ -242,9 +202,7 @@ class Mongo {
 				let update = { data: data['data'] };
 				await Document.findOneAndUpdate(filter, update);
 			} else {
-				throw Error(
-					'sileco.db: Unable to find a element with the provided index/name for the (pop) function'
-				);
+				throw Error('sileco.db: Unable to find a element with the provided index/name for the (pop) function');
 			}
 		}
 
@@ -252,26 +210,15 @@ class Mongo {
 	}
 
 	async deleteKey(object, key) {
-		if (!object)
-			throw Error(
-				'sileco.db: Please provide the object that you want to delete a key from  for the (deleteKey) function'
-			);
-		if (!key)
-			throw Error(
-				'sileco.db: Please provide the key to delete of the object for the (deleteKey) function'
-			);
+		if (!object) throw Error('sileco.db: Please provide the object that you want to delete a key from  for the (deleteKey) function');
+		if (!key) throw Error('sileco.db: Please provide the key to delete of the object for the (deleteKey) function');
 
 		let data = await Document.findOne({ key: object });
 
 		if (!data)
-			throw Error(
-				'sileco.db: The object provided for the (deleteKey) function is not valid'
-			);
+			throw Error('sileco.db: The object provided for the (deleteKey) function is not valid');
 
-		if (typeof data !== 'object')
-			throw Error(
-				'sileco.db: The object provided for the (deleteKey) function is not an object'
-			);
+		if (typeof data !== 'object') throw Error('sileco.db: The object provided for the (deleteKey) function is not an object');
 
 		if (!data['data'][key]) return;
 
