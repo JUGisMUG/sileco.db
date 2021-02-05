@@ -51,7 +51,7 @@ class Mongo {
 	}
 
 	disconnect() {
-		mon.connection.close();
+		mongoose.connection.close();
 		this.url = 'Not connected';
 		return;
 	}
