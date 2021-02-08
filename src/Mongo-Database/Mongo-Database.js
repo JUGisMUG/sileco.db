@@ -37,16 +37,21 @@ class Mongo {
 	}
 
 	state() {
-		if (mongoose.connection.readyState == 0) {
-			return 'State: Disconnected';
-		} else if (mongoose.connection.readyState == 1) {
-			return 'State: Connected';
-		} else if (mongoose.connection.readyState == 2) {
-			return 'State: Connecting';
-		} else if (mongoose.connection.readyState == 3) {
-			return 'State: Disconnected';
-		} else {
-			return;
+		switch(mongoose.connection.readyState) {
+		  case 0:
+		    return 'State: Disconnected';
+		    break;
+		  case 1:
+		    return 'State: Connected';
+		    break;
+		  case 2:
+		    return 'State: Connecting';
+		    break;
+		  case 3:
+		    return 'State: Disconnected';
+		    break;
+      default:
+        return;
 		}
 	}
 
