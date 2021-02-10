@@ -2,9 +2,10 @@
 - A advanced database for storing data! Supports 2 types of databases: Json & Mongo!
 [![NPM](https://nodei.co/npm/sileco.db.png)](https://nodei.co/npm/sileco.db/)
 ## 🔮 Amazaing Features
-- [Backup system]
-- [Handling multiple json files]
+- Backup system (for json)
+- Handling multiple json files
 - Two types of databases: Mongo and Json
+- Importation of json data to mongo
 - Simple to use
 - Good docs/examples
 ## 🔮 Getting Started
@@ -158,6 +159,15 @@ db.set('password-Tim', 'i82je992');
 db.set('password-James', '829ej29');
 
 db.deleteEach('password'); //-> Deletes all the saved passwords
+```
+## 🔮 Impoting json data to mongo
+- If you wanted to convert to mongo and stop using json and don't want to lose all your data, then:
+**TIP**: Only supports json for now....(will soon support sqlite so you can import your quick.db data aswell)
+```javascript
+const { Mongo } = require('sileco.db');
+const db = new Mongo('your Mongo uri here');
+
+db.import('kek.json'); //Imports all the json data from "kek.json" to MongoDb.
 ```
 ## 🔮 Data Backup - Json Database
 - You can also save your data as a backup, in another file, so if your main database file gets deleted..you cwn backup your data easily!
