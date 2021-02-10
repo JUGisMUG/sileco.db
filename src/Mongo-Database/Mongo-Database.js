@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
 const Document = require('./Schema.js');
 
 class Mongo {
@@ -181,8 +182,8 @@ class Mongo {
         return;
     }
 
-    fetchAllData() {
-        let data = Document.find({}).lean();
+    async fetchAllData() {
+        let data = await Document.find({}).lean();
 
         return data;
     }
@@ -286,6 +287,29 @@ class Mongo {
             data: data['data']
         };
         await Document.findOneAndUpdate(filter, update);
+    }
+
+    async import(file) {
+        if (!file) throw Error('sileco.db: Please provide the file where you want to import your data from');
+
+        let fileExtension = file.toLowerCase().split('.').pop();
+
+        if (fileExtension !== 'json') throw Error('sileco.db: Invalid file type - Only JSON is supported for now');
+
+        try {
+            fs.readFileSync(file)
+        } catch {
+            throw Error("sileco.db: FILE DOSEN'T EXIST -> Invalid file provided for the (import) function");
+        }
+
+        const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
+
+        Object.entries(data).forEach(entry => {
+            const [key, value] = entry;
+            this.set(key, value);
+        });
+
+        return;
     }
 }
 
