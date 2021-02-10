@@ -1,6 +1,6 @@
 {
   "name": "sileco.db",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "An advanced database for storing data!",
   "main": "./index.js",
   "types": "./typings/index.d.ts",

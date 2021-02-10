@@ -162,7 +162,7 @@ db.deleteEach('password'); //-> Deletes all the saved passwords
 ```
 ## 🔮 Impoting json data to mongo
 - If you wanted to convert to mongo and stop using json and don't want to lose all your data, then:
-**TIP**: Only supports json for now....(will soon support sqlite so you can import your quick.db data aswell)
+- **TIP**: Only supports json for now....(will soon support sqlite so you can import your quick.db data aswell)
 ```javascript
 const { Mongo } = require('sileco.db');
 const db = new Mongo('your Mongo uri here');
