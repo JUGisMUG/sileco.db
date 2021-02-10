@@ -34,5 +34,6 @@ declare module "sileco.db" {
     public push(array: string, value: any): void;
     public pop(array: string, index: number | string): void;
     public deleteKey(object: string, key: string): void;
+    public import(file: string): void;
   }
 }
