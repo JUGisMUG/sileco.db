@@ -5,7 +5,7 @@
 - Backup system (for json)
 - Handling multiple json files
 - Two types of databases: Mongo and Json
-- Importation of json data to mongo
+- Importation of json data to mongo & mongo to json
 - Simple to use
 - Good docs/examples
 ## 🔮 Getting Started
@@ -160,14 +160,21 @@ db.set('password-James', '829ej29');
 
 db.deleteEach('password'); //-> Deletes all the saved passwords
 ```
-## 🔮 Impoting json data to mongo
+## 🔮 Impoting json data to mongo // importing mongo data to json
 - If you wanted to convert to mongo and stop using json and don't want to lose all your data, then:
-- **TIP**: Only supports json for now....(will soon support sqlite so you can import your quick.db data aswell)
+- **TIP**: Only supports json for now....(will soon support sqlite so you can import/export your quick.db data aswell)
 ```javascript
 const { Mongo } = require('sileco.db');
 const db = new Mongo('your Mongo uri here');
 
 db.import('kek.json'); //Imports all the json data from "kek.json" to MongoDb.
+```
+- If you wanted to convert to json and stop using mongo and don't want to lose all your data, then:
+```javascript
+const { Mongo } = require('sileco.db');
+const db = new Mongo('your Mongo uri here');
+
+db.export('kek.json'); //Exports all the mongo data to "kek.json"
 ```
 ## 🔮 Data Backup - Json Database
 - You can also save your data as a backup, in another file, so if your main database file gets deleted..you cwn backup your data easily!

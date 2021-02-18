@@ -183,7 +183,7 @@ class Mongo {
     }
 
     async fetchAllData() {
-        let data = await Document.find({}).lean();
+        let data = await Document.find();
 
         return data;
     }
@@ -310,6 +310,31 @@ class Mongo {
         });
 
         return;
+    }
+    
+    async export(file) {
+      if (!file) throw Error('sileco.db: Please provide the file where you want to export your data to');
+      
+      let fileExtension = file.toLowerCase().split('.').pop();
+      
+      if (fileExtension !== 'json') throw Error('sileco.db: Invalid file type - Only JSON is supported for now');
+      
+      let data = await Document.find({});
+      
+      try {
+        fs.readFileSync(file);
+      } catch {
+        fs.writeFileSync(file, JSON.stringify({}, null, 2));
+      }
+      
+      let fileData = JSON.parse(fs.readFileSync(file, 'utf-8'));
+      
+      for (let i = 0; i < data.length; i++) {
+        fileData[data[i].key] = data[i].data
+        fs.writeFileSync(file, JSON.stringify(fileData, null, 2));
+      }
+      
+      return;
     }
 }
 
