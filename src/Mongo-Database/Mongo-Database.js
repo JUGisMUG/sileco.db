@@ -96,8 +96,8 @@ class Mongo {
         let data = await Document.findOne({
             key: key
         });
-
-        return data['data'] ? data['data'] : null;
+        
+        return data ? data['data'] : null;
     }
 
     async remove(key) {
