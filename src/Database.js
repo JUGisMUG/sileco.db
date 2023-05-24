@@ -118,8 +118,8 @@ class Database {
     
     let fileData = loadFile(this.file)
   
-    if (file[data] === undefined) return this.set(data, value);
-    if(isNaN(file[data])) return this.set(data, value);
+    if (fileData[data] === undefined) return this.set(data, value);
+    if(isNaN(fileData[data])) return this.set(data, value);
   
     fileData[data] = fileData[data] - value;
     writeData(this.file, fileData);
