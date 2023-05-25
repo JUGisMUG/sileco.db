@@ -87,7 +87,7 @@ class Database {
     
     let fileData = loadFile(this.file)
 
-    if(!fileData[data]) throw Error("sileco.db: The data you mentioned for the (remove) function dosen't exists")
+    if(!fileData[data]) throw Error("sileco.db: The data you mentioned for the (remove) function dosen't exist")
   
     fileData[data] = undefined;
     writeData(this.file, fileData);
@@ -112,8 +112,8 @@ class Database {
   }
   
   subtract(data, value) {
-    if (!data) throw Error('sileco.db: Please mention the data for the (substract) function');
-    if (!value) throw Error('sileco.db: Please mention thevalue to substract for the (substract) function');
+    if (!data) throw Error('sileco.db: Please mention the data for the (subtract) function');
+    if (!value) throw Error('sileco.db: Please mention the value to substract for the (subtract) function');
     if (typeof value !== "number") throw Error(`sileco.db: The value to add for the (substract) function must be a number, received type: ${typeof value}`);
     
     let fileData = loadFile(this.file)
@@ -128,7 +128,7 @@ class Database {
   }
   
   has(data) {
-    if (!data) throw Error('sileco.db: Please mention the data you wnat to check for the (has) function');
+    if (!data) throw Error('sileco.db: Please mention the data you want to check for the (has) function');
   
     let fileData = loadFile(this.file)
   
